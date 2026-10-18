@@ -257,6 +257,17 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 .modal-body .rsec { padding-top: 12px; border-top: 1px dashed var(--line); }
 .modal-body .rsec:first-child { border-top: 0; padding-top: 0; }
 body.lock { overflow: hidden; }
+.reg { background: linear-gradient(rgba(7, 6, 26, .78), rgba(7, 6, 26, .86)), var(--p-entrance) center / cover no-repeat; }
+.reg-box { max-width: 720px; margin: 0 auto; text-align: center; display: grid; gap: 14px; justify-items: center; padding: 36px 20px; border: 1px solid var(--violet-2); border-radius: 22px; background: rgba(17, 15, 51, .72); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); box-shadow: 0 0 40px rgba(124, 58, 237, .45); }
+.reg-box h2 { font-size: clamp(1.6rem, 4.6vw, 2.5rem); font-weight: 700; }
+.reg-box p { color: var(--fg); opacity: .9; max-width: 46ch; }
+.reg-box small { color: var(--mut); font-size: 13px; }
+.btn.big { padding: 15px 36px; font-size: 17px; margin-top: 6px; }
+.notice { max-width: 760px; margin: 0 auto 28px; display: flex; gap: 14px; align-items: flex-start; padding: 14px 18px; border: 1px solid #f59e0b; border-radius: 14px; background: rgba(245, 158, 11, .12); box-shadow: 0 0 22px rgba(245, 158, 11, .25); }
+.notice b { flex: none; padding: 3px 10px; border-radius: 999px; background: #f59e0b; color: #1b1200; font: 800 11px var(--f-body); letter-spacing: .14em; text-transform: uppercase; }
+.notice p { font-size: 14px; color: var(--fg); }
+.modal-body .note { padding: 12px 14px; border: 1px solid #f59e0b; border-radius: 12px; background: rgba(245, 158, 11, .12); font-size: 14px; }
+.modal-body .note b { color: #fbbf24; text-transform: uppercase; letter-spacing: .12em; font-size: 11px; margin-right: 6px; }
 </style>
 </head>
 <body>
@@ -306,6 +317,7 @@ body.lock { overflow: hidden; }
 <section id="events" class="band">
   <div class="wrap">
     <div class="head"><h2>Our Events</h2><p>Explore, participate and make your mark!</p></div>
+    <div class="notice" role="note"><b>Important</b><p>Students who take part in a technical event are also allowed to take part in the non-technical events.</p></div>
     <div class="chips" id="chips" role="group" aria-label="Filter events"></div>
     <div class="grid" id="eventGrid"></div>
   </div>
@@ -408,6 +420,18 @@ body.lock { overflow: hidden; }
     </div>
   </div>
 </section>
+
+<section id="register" class="band reg">
+  <div class="wrap">
+    <div class="reg-box">
+      <span class="eyebrow">Registration Open</span>
+      <h2>Ready To Join Festober '26?</h2>
+      <p>Pick your event, form your team and register before the entries close. Late entries are not accepted.</p>
+      <a class="btn big" href="https://forms.gle/HpXYEMT6zZoZdRCz8" target="_blank" rel="noopener noreferrer">Register Now &rarr;</a>
+      <small>22 October 2026 &middot; Dhaanish Ahmed Institute of Technology</small>
+    </div>
+  </div>
+</section>
 </main>
 
 <footer>
@@ -479,6 +503,7 @@ var ICONS = {
   mic: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>'
 };
 
+var IMPORTANT = "Students who take part in a technical event are also allowed to take part in the non-technical events.";
 var GENERAL = ["Carry your college ID card; entry is not allowed without it.", "Report at the venue 15 minutes before the start time.", "The coordinators' and judges' decisions are final.", "Misconduct, cheating or damage to property means disqualification.", "Registration is required, and late entries are not accepted."];
 var RULES = {"Hackathon": {"venue": "Arena", "groups": [{"items": ["Team size: 2 to 4 members.", "Build a working prototype for the given problem statement or theme.", "Use your own laptops. Pre-written or pre-built projects are not allowed.", "Open-source libraries and APIs are allowed, but they must be declared.", "Final presentation: 5 minutes plus 2 minutes of Q&A.", "Judging: innovation, technical depth, working demo, presentation."]}]}, "CTF (Capture the Flag)": {"venue": "Cube X", "groups": [{"items": ["Team size: 1 to 3 members.", "Challenges cover web, cryptography, forensics, reverse engineering and general skills, with points by difficulty.", "Flags must be submitted in the given format on the scoreboard.", "No attacking the CTF platform or other teams, and no sharing flags or hints between teams.", "Brute-force tools are allowed only on the designated challenges.", "Ties are broken by the earlier last-submission time."]}]}, "UI / UX": {"venue": "Cubelite", "groups": [{"items": ["Team size: 1 to 2 members.", "A theme is given on the spot. Design a mobile or web interface in Figma or a similar tool.", "Templates and UI kits are not allowed, though icons and stock images are fine with credit.", "Submit your design link or file before time runs out.", "Judging: creativity, usability, visual consistency, theme relevance."]}]}, "eSports": {"venue": "Room 221", "groups": [{"label": "Free Fire", "items": ["Squad of 4 players, using their own mobile devices.", "Knockout or league format, decided on the day.", "No hacks, mods, emulators or teaming with opponents.", "Teams that are late by more than 10 minutes are disqualified.", "Disconnections are the player's responsibility, with no rematch except for a technical fault from the organisers."]}, {"label": "e-Football", "items": ["1v1 knockout matches.", "The match time and settings are set by the organisers.", "Players bring their own controllers or devices, if required.", "Rage-quitting counts as a loss, and a draw goes to extra time or penalties."]}]}, "Treasure Hunt": {"venue": "Campus", "groups": [{"items": ["Team size: 3 to 4 members.", "Clues are given one by one, and each leads to the next location.", "Stay inside the campus boundary, and do not enter restricted areas.", "Never remove or damage a clue, and do not follow or mislead other teams.", "The first team to solve the final clue wins. Penalties apply for rule violations."]}]}, "Wrong Answer Only": {"venue": "Room 222", "groups": [{"items": ["Individual or pairs.", "A question is shown, and you give the funniest wrong answer you can.", "Answers must be creative and clean. Offensive, political or personal jokes lead to disqualification.", "Judges and audience reaction decide the winners.", "Each round has a time limit, and the host's decision is final."]}]}};
 
@@ -574,6 +599,7 @@ function openRules(title) {
     h += '<div class="rsec">' + eventRules(title) + "</div>";
     h += '<div class="rsec"><h4>General rules (all events)</h4>' + ul(GENERAL) + "</div>";
   }
+  h = '<div class="note"><b>Important</b>' + esc(IMPORTANT) + "</div>" + h;
   rulesBody.innerHTML = h;
   rulesBody.scrollTop = 0;
   lastFocus = document.activeElement;
